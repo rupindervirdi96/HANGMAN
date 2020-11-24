@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/hangman/static/css/main.119b9e78.chunk.css",
-    "main.js": "/hangman/static/js/main.c33693d8.chunk.js",
-    "main.js.map": "/hangman/static/js/main.c33693d8.chunk.js.map",
+    "main.js": "/hangman/static/js/main.448b71df.chunk.js",
+    "main.js.map": "/hangman/static/js/main.448b71df.chunk.js.map",
     "runtime-main.js": "/hangman/static/js/runtime-main.395feef2.js",
     "runtime-main.js.map": "/hangman/static/js/runtime-main.395feef2.js.map",
-    "static/js/2.12a0ba66.chunk.js": "/hangman/static/js/2.12a0ba66.chunk.js",
-    "static/js/2.12a0ba66.chunk.js.map": "/hangman/static/js/2.12a0ba66.chunk.js.map",
+    "static/js/2.ad43155c.chunk.js": "/hangman/static/js/2.ad43155c.chunk.js",
+    "static/js/2.ad43155c.chunk.js.map": "/hangman/static/js/2.ad43155c.chunk.js.map",
     "index.html": "/hangman/index.html",
-    "precache-manifest.3b323463eec8bbd6db0df4084de5c0f4.js": "/hangman/precache-manifest.3b323463eec8bbd6db0df4084de5c0f4.js",
+    "precache-manifest.a24cad8b2d363788d3c9d0b6dda6a157.js": "/hangman/precache-manifest.a24cad8b2d363788d3c9d0b6dda6a157.js",
     "service-worker.js": "/hangman/service-worker.js",
     "static/css/main.119b9e78.chunk.css.map": "/hangman/static/css/main.119b9e78.chunk.css.map",
-    "static/js/2.12a0ba66.chunk.js.LICENSE.txt": "/hangman/static/js/2.12a0ba66.chunk.js.LICENSE.txt",
+    "static/js/2.ad43155c.chunk.js.LICENSE.txt": "/hangman/static/js/2.ad43155c.chunk.js.LICENSE.txt",
     "static/media/darkMode.svg": "/hangman/static/media/darkMode.f050bb95.svg",
     "static/media/hint.svg": "/hangman/static/media/hint.f6dd9a75.svg",
     "static/media/score.png": "/hangman/static/media/score.248d8ad5.png"
   },
   "entrypoints": [
     "static/js/runtime-main.395feef2.js",
-    "static/js/2.12a0ba66.chunk.js",
+    "static/js/2.ad43155c.chunk.js",
     "static/css/main.119b9e78.chunk.css",
-    "static/js/main.c33693d8.chunk.js"
+    "static/js/main.448b71df.chunk.js"
   ]
 }
