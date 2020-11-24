@@ -24,7 +24,7 @@ function Display() {
           <h2>
             {game.currCat ? game.currCat : "Select a category to begin.."}
           </h2>
-          <span>Attempts left: 7</span>
+          <span>Attempts left: {game.attemptsRemaining}</span>
         </div>
         <div
           style={{
@@ -57,12 +57,18 @@ function Display() {
           <Puzzle hide={app.begin}>
             {game.questions[game.questionCount]
               ?.trim()
-              .split("")
-              .map((blank, i) => {
+              .split(" ")
+              .map((blank) => {
                 return (
-                  <Blank key={i} text={blank.toUpperCase()}>
-                    {blank.toUpperCase()}
-                  </Blank>
+                  <div>
+                    {blank.split("").map((x, i) => {
+                      return (
+                        <Blank key={i} text={blank.toUpperCase()}>
+                          {x.toUpperCase()}
+                        </Blank>
+                      );
+                    })}
+                  </div>
                 );
               })}
           </Puzzle>
@@ -77,15 +83,20 @@ function Display() {
             src={scoreIcon}
             alt=""
             onClick={() =>
-              dispatch({
-                type: "CORRECT_GUESS",
-                payload: game.questionCount + 1,
-              })
+              game.attemptsRemaining > 0
+                ? dispatch({
+                    type: "CORRECT_GUESS",
+                  })
+                : ""
             }
           />
         </li>
         <li>
-          <img src={darkModeIcon} alt="" />
+          <img
+            src={darkModeIcon}
+            alt=""
+            onClick={() => dispatch({ type: "APP_MODE" })}
+          />
         </li>
       </OptionStyles>
     </DisplayStyles>
@@ -161,6 +172,10 @@ const Puzzle = styled.div`
   width: 60%;
   margin: auto;
   border-radius: 5px;
+  div {
+    display: inline-block;
+    margin: 0px 10px;
+  }
 `;
 
 const Blank = styled.span`
@@ -184,7 +199,7 @@ const OptionStyles = styled.ul`
   width: 50%;
   margin: auto;
   align-items: center;
-  padding:10px 0px 0px 0px;
+  padding: 10px 0px 0px 0px;
 
   li {
     height: 30px;

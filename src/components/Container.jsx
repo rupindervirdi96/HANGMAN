@@ -6,14 +6,16 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 import ScoreBoard from "./Scoreboard";
+import { useSelector } from "react-redux";
 
 function Container(props) {
-  const type = () => {
-    console.log("hello");
-  };
+  const { app } = useSelector((state) => ({
+    app: state.app,
+  }));
+
   return (
     <ContainerStyles>
-      <Overlay />
+      <Overlay mode={app.mode} />
       <Sidebar />
       <Navbar />
       <Display />
@@ -30,7 +32,6 @@ const ContainerStyles = styled.div`
   width: 700px;
   border-radius: 10px;
   box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.4);
-  background-color: #0091ff;
   display: grid;
   position: relative;
   z-index: 1;
@@ -47,7 +48,8 @@ const Overlay = styled.div`
   height: 100%;
   z-index: -1;
   border-radius: 10px;
-  background-color: #0091ff;
+  background-color: ${(props) =>
+    props.mode === "bright" ? "#0091ff" : "#000000"};
 `;
 
 export default Container;

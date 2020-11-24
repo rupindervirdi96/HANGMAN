@@ -51,9 +51,9 @@ const initialState = {
   guessedLetters: [],
   correctGuess: [],
   questionCount: 0,
-  
+  attemptsRemaining: 7,
   score: 0,
-};  
+};
 
 const app = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -68,12 +68,12 @@ const app = (state = initialState, { type, payload }) => {
     case "CORRECT_GUESS":
       return {
         ...state,
-        questionCount: payload,
+        attemptsRemaining: state.attemptsRemaining - 1,
       };
     case "WRONG_GUESS":
       return {
         ...state,
-        questionCount: payload,
+        attemptsRemaining: state.attemptsRemaining - 1,
       };
 
     default:
