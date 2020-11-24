@@ -34,6 +34,7 @@ const ContainerStyles = styled.div`
   display: grid;
   position: relative;
   z-index: 1;
+  padding: 0px 10px;
   grid-template-rows: max-content 2fr 1fr;
   @media (max-width: 460px) {
     width: 400px;
@@ -45,6 +46,7 @@ const Overlay = styled.div`
   position: absolute;
   height: 100%;
   z-index: -1;
+  border-radius: 10px;
   background-color: #0091ff;
 `;
 

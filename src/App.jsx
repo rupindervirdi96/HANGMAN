@@ -2,9 +2,14 @@ import React from "react";
 import "./App.css";
 import styled from "styled-components";
 import Container from "./components/Container";
+import { useEffect } from "react";
 // import Scoreboard from "./components/Scoreboard";
 
 function App() {
+  useEffect(() => {
+    document.querySelector(".keyboard").focus();
+  });
+
   return (
     <div
       style={{

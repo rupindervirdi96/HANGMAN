@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import Display from "./Display";
 
 function Sidebar(props) {
   const { app, game } = useSelector((state) => ({
@@ -15,15 +16,19 @@ function Sidebar(props) {
       <CategoryStyles type={app.type}>
         <h3>Categories</h3>
         <ul type="none">
-          {game.categories.map((category, i) => (
+          {game.puzzles.map((puzzle, i) => (
             <li
               key={i}
               onClick={() => {
-                dispatch({ type: "SET_CURR_CAT", payload: { category, i } });
+                dispatch({
+                  type: "SET_CURR_CAT",
+                  payload: puzzle,
+                });
                 dispatch({ type: "TYPE_OF_MENU", payload: "" });
+                dispatch({ type: "BEGIN_GAME", payload: true });
               }}
             >
-              {category}
+              {puzzle.category}
             </li>
           ))}
         </ul>
@@ -47,16 +52,22 @@ const SidebarStyles = styled.div`
   z-index: -10;
   border-radius: 5px;
   padding: 10px;
+  overflow: hidden;
   ${(props) =>
     props.type === "cat"
-      ? "left: 0%;transform:translateX(-100%);transition:150ms all linear;"
+      ? "left: 0%;transform:translateX(-100%);transition:250ms all linear;"
       : props.type === "register"
-      ? "left:100%;transition:150ms all linear;"
-      : "left:50%;transition:150ms all linear;opacity:0"};
+      ? "left:100%;transition:250ms all linear;"
+      : "left:50%;transition:250ms all linear;"};
 `;
 
 const CategoryStyles = styled.div`
-  ${(props) => (props.type != "cat" ? "display:none" : "display:block")};
+  ${(props) =>
+    props.type === ""
+      ? "display:block"
+      : props.type === "register"
+      ? "display:none; transition-delay:50ms"
+      : ""};
   h3 {
     color: #fff;
     padding: 12px 0px 13px 0px;
@@ -78,7 +89,12 @@ const CategoryStyles = styled.div`
 `;
 
 const RegisterStyles = styled.div`
-  ${(props) => (props.type != "register" ? "display:none" : "display:block")};
+  ${(props) =>
+    props.type == ""
+      ? "display:block"
+      : props.type === "cat"
+      ? "display:none;transition-delay:150ms"
+      : ""};
   h3 {
     color: #fff;
     padding: 12px 0px 12px 0px;

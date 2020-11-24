@@ -42,7 +42,7 @@ const NavbarStyles = styled.div`
   grid-template-columns: max-content 1fr max-content;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 10px;
+  padding: 10px 0px;
   position: relative;
   border-radius: 5px 5px 0px 0px;
   z-index: 1;

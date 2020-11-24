@@ -3,45 +3,86 @@ import styled from "styled-components";
 import hintIcon from "../assets/hint.svg";
 import scoreIcon from "../assets/score.png";
 import darkModeIcon from "../assets/darkMode.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Alert from "./Alert";
 
 // Current Component
 function Display() {
-  const { game } = useSelector((state) => ({
+  const { game, app } = useSelector((state) => ({
     game: state.game,
+    app: state.app,
   }));
+
+  const dispatch = useDispatch();
 
   return (
     <DisplayStyles>
       <PuzzleStyles>
         <Alert />
         <div className="puzzle-navBar">
-          <span>Question: 1/10</span>
+          <span>Question: {game.questionCount + 1}/10</span>
           <h2>
-            {game.currCat.cat ? game.currCat : "Select a category to begin.."}
+            {game.currCat ? game.currCat : "Select a category to begin.."}
           </h2>
           <span>Attempts left: 7</span>
         </div>
-        <Puzzle>
-          {/* {puzzle[0]
-            .trim()
-            .split("")
-            .map((blank, i) => {
+        <div
+          style={{
+            // border: "1px solid black",
+            position: "relative",
+            margin: "auto",
+            width: "90%",
+          }}
+        >
+          <CatDisplayStyles hide={app.begin}>
+            {game.puzzles.map((puzzle) => {
               return (
-                <Blank key={i} text={blank.toUpperCase()}>
-                  {blank.toUpperCase()}
-                </Blank>
+                <div
+                  onClick={() => {
+                    dispatch({
+                      type: "SET_CURR_CAT",
+                      payload: puzzle,
+                    });
+                    dispatch({
+                      type: "BEGIN_GAME",
+                      payload: true,
+                    });
+                  }}
+                >
+                  {puzzle.category}
+                </div>
               );
-            })} */}
-        </Puzzle>
+            })}
+          </CatDisplayStyles>
+          <Puzzle hide={app.begin}>
+            {game.questions[game.questionCount]
+              ?.trim()
+              .split("")
+              .map((blank, i) => {
+                return (
+                  <Blank key={i} text={blank.toUpperCase()}>
+                    {blank.toUpperCase()}
+                  </Blank>
+                );
+              })}
+          </Puzzle>
+        </div>
       </PuzzleStyles>
       <OptionStyles>
         <li>
           <img src={hintIcon} alt="" />
         </li>
         <li>
-          <img src={scoreIcon} alt="" />
+          <img
+            src={scoreIcon}
+            alt=""
+            onClick={() =>
+              dispatch({
+                type: "CORRECT_GUESS",
+                payload: game.questionCount + 1,
+              })
+            }
+          />
         </li>
         <li>
           <img src={darkModeIcon} alt="" />
@@ -50,16 +91,40 @@ function Display() {
     </DisplayStyles>
   );
 }
+
+const CatDisplayStyles = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  display: none;
+  ${(props) => (props.hide ? "display:none" : "display:block")};
+  div {
+    display: inline-block;
+    color: #ff8a31;
+    background: white;
+    padding: 6px 10px;
+    margin: 10px;
+    border-radius: 3px;
+  }
+`;
+
 const DisplayStyles = styled.div`
-  max-width: 100%;
-  padding: 0px 10px;
+  min-width: 100%;
   margin: 10px 0px;
   display: grid;
-  /* background-color: #0091ff; */
   grid-template-rows: 2fr max-content;
 `;
 
 const PuzzleStyles = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
   padding: 20px 0px;
   border-radius: 10px;
   margin: 10px 0px;
@@ -67,7 +132,7 @@ const PuzzleStyles = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
   .puzzle-navBar {
@@ -119,6 +184,7 @@ const OptionStyles = styled.ul`
   width: 50%;
   margin: auto;
   align-items: center;
+  padding:10px 0px 0px 0px;
 
   li {
     height: 30px;

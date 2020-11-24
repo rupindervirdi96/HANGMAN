@@ -1,49 +1,59 @@
 const initialState = {
-  categories: ["MOVIES", "TV_SERIES", "DAILY"],
   puzzles: [
-    [
-      "MATRIX",
-      "WANTED",
-      "LORD OF THE RINGS",
-      "TRANSFORMERS",
-      "THE SHAWSHANK REDEMPTION",
-      "THE FORREST GUMP",
-      "DUMB AND DUMBER",
-      "PAPILLON",
-      "CATCH ME IF YOU CAN",
-      "THE HUNGER GAMES",
-    ],
-    [
-      "PEAKY BLINDERS",
-      "LUCIFER",
-      "EMILY IN PARIS",
-      "FRIENDS",
-      "TWO AND A HALF MEN",
-      "STRANGER THINGS",
-      "PUNISHER",
-      "GOTHAM",
-      "MONEY HEIST",
-      "MIRZAPUR",
-    ],
-    [
-      "TOOTHPASTE",
-      "SUNLIGHT",
-      "MOBILE PHONE",
-      "MILK",
-      "BEDROOM",
-      "GROCERY",
-      "KEYS",
-      "REFRIGERATOR",
-      "METRO",
-      "LAPTOP",
-    ],
+    {
+      category: "MOVIES",
+      questions: [
+        "MATRIX",
+        "WANTED",
+        "LORD OF THE RINGS",
+        "TRANSFORMERS",
+        "THE SHAWSHANK REDEMPTION",
+        "THE FORREST GUMP",
+        "DUMB AND DUMBER",
+        "PAPILLON",
+        "CATCH ME IF YOU CAN",
+        "THE HUNGER GAMES",
+      ],
+    },
+    {
+      category: "TV SERIES",
+      questions: [
+        "PEAKY BLINDERS",
+        "LUCIFER",
+        "EMILY IN PARIS",
+        "FRIENDS",
+        "TWO AND A HALF MEN",
+        "STRANGER THINGS",
+        "PUNISHER",
+        "GOTHAM",
+        "MONEY HEIST",
+        "MIRZAPUR",
+      ],
+    },
+    {
+      category: "DAILY",
+      questions: [
+        "TOOTHPASTE",
+        "SUNLIGHT",
+        "MOBILE PHONE",
+        "MILK",
+        "BEDROOM",
+        "GROCERY",
+        "KEYS",
+        "REFRIGERATOR",
+        "METRO",
+        "LAPTOP",
+      ],
+    },
   ],
   currCat: "",
-  currPuzzle: null,
+  questions: [],
   guessedLetters: [],
   correctGuess: [],
+  questionCount: 0,
+  
   score: 0,
-};
+};  
 
 const app = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -51,8 +61,21 @@ const app = (state = initialState, { type, payload }) => {
       return {
         ...state,
         currCat: payload.category,
-        currPuzzles: state.puzzles[payload.i],
+        questions: payload.questions,
+        questionCount: 0,
       };
+
+    case "CORRECT_GUESS":
+      return {
+        ...state,
+        questionCount: payload,
+      };
+    case "WRONG_GUESS":
+      return {
+        ...state,
+        questionCount: payload,
+      };
+
     default:
       return state;
   }

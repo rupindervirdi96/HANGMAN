@@ -5,12 +5,12 @@ import { useSelector } from "react-redux";
 function Keyboard(props) {
   const { keys } = useSelector((state) => ({ keys: state.app.keys }));
 
-  const onKeyPress = () => {
+  const onkeypress = () => {
     console.log("hello");
   };
 
   return (
-    <KeyboardStyles onKeyDown={onKeyPress}>
+    <KeyboardStyles className="keyboard" onKeyDown={onkeypress}>
       <div className="top">
         {keys.top.map((key, i) => {
           return (
@@ -45,14 +45,13 @@ function Keyboard(props) {
 const KeyboardStyles = styled.div`
   display: flex;
   flex-direction: column;
-  width: 80%;
-  padding: 20px 0px;
+  width: 100%;
+  padding: 10px 0px;
   margin: 0 auto;
   justify-content: center;
   transition: 150ms all linear;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-
   @media (max-width: 350px) {
     width: 300px;
     transition: 150ms all linear;

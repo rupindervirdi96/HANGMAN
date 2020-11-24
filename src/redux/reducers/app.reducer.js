@@ -5,6 +5,7 @@ const initialState = {
     middle: ["A", "S", "D", "F", "G", "H", "J", "K", "L"],
     bottom: ["Z", "X", "C", "V", "B", "N", "M"],
   },
+  begin: false,
 };
 
 const app = (state = initialState, { type, payload }) => {
@@ -14,6 +15,8 @@ const app = (state = initialState, { type, payload }) => {
         ...state,
         type: payload,
       };
+    case "BEGIN_GAME":
+      return { ...state, begin: payload };
     default:
       return state;
   }
