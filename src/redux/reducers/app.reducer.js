@@ -7,6 +7,11 @@ const initialState = {
   },
   begin: false,
   mode: "bright",
+  alert: {
+    type: "",
+    message: "",
+    show: false,
+  },
 };
 
 const app = (state = initialState, { type, payload }) => {
@@ -24,6 +29,16 @@ const app = (state = initialState, { type, payload }) => {
       } else {
         return { ...state, mode: "bright" };
       }
+    case "ALERT":
+      return {
+        ...state,
+        alert: {
+          type: payload.type,
+          message: payload.message,
+          show: payload.show,
+        },
+      };
+
     default:
       return state;
   }

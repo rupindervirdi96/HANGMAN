@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 function Navbar() {
-  const { app } = useSelector((state) => ({
+  const { app, title, wrongAttempts } = useSelector((state) => ({
     app: state.app,
+    title: state.game.title,
+    wrongAttempts: state.game.wrongAttempts,
   }));
 
   const dispatch = useDispatch();
@@ -22,7 +24,22 @@ function Navbar() {
       >
         CHANGE CATEGORY
       </button>
-      <h1>HANGMAN</h1>
+      <div>
+        <ul type="none">
+          {title.split("").map((letter, key) => {
+            return (
+              <li>
+                <img
+                  src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
+                  alt=""
+                  hidden={title.indexOf(letter) + 1 !== wrongAttempts}
+                />
+                <span>{letter}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
       <button
         onClick={() => {
           if (app.type === "register") {
@@ -39,7 +56,7 @@ function Navbar() {
 }
 const NavbarStyles = styled.div`
   display: grid;
-  grid-template-columns: max-content 1fr max-content;
+  grid-template-columns: 1fr 3fr 1fr;
   align-items: center;
   justify-content: space-between;
   padding: 10px 0px;
@@ -65,12 +82,43 @@ const NavbarStyles = styled.div`
       font-size: 8px;
     }
   }
-  h1 {
-    text-align: center;
-    display: inline;
+  div {
     color: white;
     font-family: "Roboto", monospace;
-    letter-spacing: 5px;
+    text-align: center;
+    ul {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 0px;
+      margin: auto;
+      li {
+        height: 25px;
+        width: 25px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        span {
+          border: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 35px;
+        }
+        img {
+          border: none;
+          position: absolute;
+          top: 50%;
+          left: 60%;
+          transform: translate(-50%, -50%);
+          height: 25px;
+          width: 25px;
+        }
+      }
+    }
     @media (max-width: 460px) {
       font-size: 16px;
     }

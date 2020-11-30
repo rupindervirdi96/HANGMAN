@@ -1,12 +1,41 @@
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { guess } from "../redux/actions/game.actions";
+import { alert } from "../redux/actions/app.actions";
 
 function Keyboard(props) {
-  const { keys } = useSelector((state) => ({ keys: state.app.keys }));
+  const { keys } = useSelector((state) => ({
+    keys: state.app.keys,
+  }));
 
-  const onkeypress = () => {
-    console.log("hello");
+  const {
+    correctGuesses,
+    reqNbGuesses,
+    currentPuzzle,
+    wrongAttempts,
+    guessedLetters,
+  } = useSelector((state) => ({
+    correctGuesses: state.game.correctGuesses,
+    reqNbGuesses: state.game.reqNbGuesses,
+    currentPuzzle: state.game.currentPuzzle,
+    wrongAttempts: state.game.wrongAttempts,
+    guessedLetters: state.game.guessedLetters,
+  }));
+
+  const dispatch = useDispatch();
+
+  const onkeypress = async (key) => {
+    alert('Select a category to begin')
+    await dispatch(
+      guess(key, correctGuesses, reqNbGuesses, currentPuzzle, wrongAttempts)
+    );
+    if (wrongAttempts === 6) {
+      dispatch(alert("fail", "U R DEAD", true));
+      setTimeout(() => {
+        dispatch(alert("fail", "U R DEAD", false));
+      }, 2000);
+    }
   };
 
   return (
@@ -14,7 +43,7 @@ function Keyboard(props) {
       <div className="top">
         {keys.top.map((key, i) => {
           return (
-            <div onClick={() => alert(key)} key={i} className="key">
+            <div onClick={() => onkeypress(key)} key={i} className="key">
               <span>{key}</span>
             </div>
           );
@@ -23,7 +52,7 @@ function Keyboard(props) {
       <div className="middle">
         {keys.middle.map((key, i) => {
           return (
-            <div onClick={() => alert(key)} key={i} className="key">
+            <div onClick={() => onkeypress(key)} key={i} className="key">
               <span>{key}</span>
             </div>
           );
@@ -32,7 +61,7 @@ function Keyboard(props) {
       <div className="bottom">
         {keys.bottom.map((key, i) => {
           return (
-            <div onClick={() => alert(key)} key={i} className="key">
+            <div onClick={() => onkeypress(key)} key={i} className="key">
               <span>{key}</span>
             </div>
           );

@@ -27,7 +27,7 @@ function Container(props) {
 }
 
 const ContainerStyles = styled.div`
-  height: 80vh;
+  height: 90vh;
   margin: auto;
   width: 700px;
   border-radius: 10px;

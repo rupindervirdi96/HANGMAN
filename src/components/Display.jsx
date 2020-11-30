@@ -5,12 +5,15 @@ import scoreIcon from "../assets/score.png";
 import darkModeIcon from "../assets/darkMode.svg";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "./Alert";
+import { alert } from "../redux/actions/app.actions";
 
 // Current Component
 function Display() {
-  const { game, app } = useSelector((state) => ({
+  const { game, app, currentPuzzle, correctGuesses } = useSelector((state) => ({
     game: state.game,
     app: state.app,
+    currentPuzzle: state.game.currentPuzzle,
+    correctGuesses: state.game.correctGuesses,
   }));
 
   const dispatch = useDispatch();
@@ -24,11 +27,10 @@ function Display() {
           <h2>
             {game.currCat ? game.currCat : "Select a category to begin.."}
           </h2>
-          <span>Attempts left: {game.attemptsRemaining}</span>
+          <span>Attempts left: {game.wrongAttempts}</span>
         </div>
         <div
           style={{
-            // border: "1px solid black",
             position: "relative",
             margin: "auto",
             width: "90%",
@@ -55,7 +57,7 @@ function Display() {
             })}
           </CatDisplayStyles>
           <Puzzle hide={app.begin}>
-            {game.questions[game.questionCount]
+            {currentPuzzle
               ?.trim()
               .split(" ")
               .map((blank) => {
@@ -64,7 +66,7 @@ function Display() {
                     {blank.split("").map((x, i) => {
                       return (
                         <Blank key={i} text={blank.toUpperCase()}>
-                          {x.toUpperCase()}
+                          {correctGuesses.includes(x) ? x : null}
                         </Blank>
                       );
                     })}
@@ -82,13 +84,19 @@ function Display() {
           <img
             src={scoreIcon}
             alt=""
-            onClick={() =>
-              game.attemptsRemaining > 0
-                ? dispatch({
-                    type: "CORRECT_GUESS",
-                  })
-                : ""
-            }
+            onClick={() => {
+              if (game.wrongAttempts > 0) {
+                dispatch({
+                  type: "CORRECT_GUESS",
+                });
+              }
+              if (game.wrongAttempts === 1) {
+                dispatch(alert("fail", "out of attempts", true));
+                setTimeout(() => {
+                  dispatch(alert("fail", "out of attempts", false));
+                }, 2000);
+              }
+            }}
           />
         </li>
         <li>
