@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { guess } from "../redux/actions/game.actions";
 import { alert } from "../redux/actions/app.actions";
+import { useEffect } from "react";
 
 function Keyboard(props) {
   const { keys } = useSelector((state) => ({
@@ -26,10 +27,10 @@ function Keyboard(props) {
   const dispatch = useDispatch();
 
   const onkeypress = async (key) => {
-    alert('Select a category to begin')
     await dispatch(
       guess(key, correctGuesses, reqNbGuesses, currentPuzzle, wrongAttempts)
     );
+
     if (wrongAttempts === 6) {
       dispatch(alert("fail", "U R DEAD", true));
       setTimeout(() => {
@@ -38,32 +39,43 @@ function Keyboard(props) {
     }
   };
 
+  useEffect(() => {
+    try {
+      if (correctGuesses.length === reqNbGuesses) {
+        dispatch({
+          type: "CORRECT_ANSWER",
+          payload: "",
+        });
+      }
+    } catch (error) {}
+  }, [correctGuesses]);
+
   return (
-    <KeyboardStyles className="keyboard" onKeyDown={onkeypress}>
+    <KeyboardStyles className="keyboard" onKeyDown={onkeypress} tabIndex="0">
       <div className="top">
         {keys.top.map((key, i) => {
           return (
-            <div onClick={() => onkeypress(key)} key={i} className="key">
+            <button onClick={() => onkeypress(key)} key={i} className="key">
               <span>{key}</span>
-            </div>
+            </button>
           );
         })}
       </div>
       <div className="middle">
         {keys.middle.map((key, i) => {
           return (
-            <div onClick={() => onkeypress(key)} key={i} className="key">
+            <button onClick={() => onkeypress(key)} key={i} className="key">
               <span>{key}</span>
-            </div>
+            </button>
           );
         })}
       </div>
       <div className="bottom">
         {keys.bottom.map((key, i) => {
           return (
-            <div onClick={() => onkeypress(key)} key={i} className="key">
+            <button onClick={() => onkeypress(key)} key={i} className="key">
               <span>{key}</span>
-            </div>
+            </button>
           );
         })}
       </div>
@@ -79,7 +91,9 @@ const KeyboardStyles = styled.div`
   margin: 0 auto;
   justify-content: center;
   transition: 150ms all linear;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  border: none;
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
   border-radius: 5px;
   @media (max-width: 350px) {
     width: 300px;
@@ -99,6 +113,8 @@ const KeyboardStyles = styled.div`
       transition: 150ms all linear;
       border-radius: 2px;
       background-color: #ff8a31;
+      border: none;
+      outline: none;
       :hover {
         transform: scale(1.1);
       }

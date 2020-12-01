@@ -26,13 +26,5 @@ export const guess = (
         payload: { key: key },
       });
     }
-    
-    if (correctGuesses.length + 1 === reqNbGuesses) {
-      alert("true");
-      dispatch({
-        type: "CORRECT_ANSWER",
-        payload: "",
-      });
-    }
   }
 };

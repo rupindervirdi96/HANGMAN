@@ -6,6 +6,7 @@ import darkModeIcon from "../assets/darkMode.svg";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "./Alert";
 import { alert } from "../redux/actions/app.actions";
+import { useEffect } from "react";
 
 // Current Component
 function Display() {
@@ -27,7 +28,7 @@ function Display() {
           <h2>
             {game.currCat ? game.currCat : "Select a category to begin.."}
           </h2>
-          <span>Attempts left: {game.wrongAttempts}</span>
+          <span>Wrong Attempts: {game.wrongAttempts}/7</span>
         </div>
         <div
           style={{
@@ -144,14 +145,14 @@ const PuzzleStyles = styled.div`
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
-  padding: 20px 0px;
+  padding: 10px 0px 20px 0px;
   border-radius: 10px;
-  margin: 10px 0px;
+  /* margin-bottom: 10px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
   position: relative;
   overflow: hidden;
   .puzzle-navBar {
@@ -178,27 +179,26 @@ const PuzzleStyles = styled.div`
 const Puzzle = styled.div`
   text-align: center;
   width: 60%;
-  margin: auto;
+  margin: 0 auto;
   border-radius: 5px;
   div {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0px 10px;
   }
 `;
 
 const Blank = styled.span`
-  height: 25px;
-  width: 22px;
+  min-height: 25px;
+  min-width: 25px;
   margin: 3px;
   display: inline-block;
   color: White;
   font-size: 18px;
   font-weight: bold;
-  padding: 2px;
-  ${(props) =>
-    props.text === " "
-      ? "border:none"
-      : "border-bottom: 2px solid rgba(255, 255, 255, 1)"}
+  /* padding: 2px; */
+  border-bottom: 3px solid white;
 `;
 
 const OptionStyles = styled.ul`

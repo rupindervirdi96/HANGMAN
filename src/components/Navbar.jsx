@@ -39,6 +39,7 @@ function Navbar() {
             );
           })}
         </ul>
+        <ul className="crossList"></ul>
       </div>
       <button
         onClick={() => {
@@ -63,7 +64,7 @@ const NavbarStyles = styled.div`
   position: relative;
   border-radius: 5px 5px 0px 0px;
   z-index: 1;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
   button {
     padding: 10px;
     font-size: 12px;
@@ -86,6 +87,8 @@ const NavbarStyles = styled.div`
     color: white;
     font-family: "Roboto", monospace;
     text-align: center;
+    position: relative;
+
     ul {
       width: 100%;
       display: flex;
@@ -118,6 +121,9 @@ const NavbarStyles = styled.div`
           width: 25px;
         }
       }
+    }
+    .crossList {
+      position: absolute;
     }
     @media (max-width: 460px) {
       font-size: 16px;

@@ -66,6 +66,9 @@ const app = (state = initialState, { type, payload }) => {
         questions: payload.questions,
         questionCount: 0,
         currentPuzzle: payload.questions[0],
+        correctGuesses: [],
+        guessedLetters: [],
+        wrongAttempts: 0,
         reqNbGuesses: payload.questions[0]
           .replace(" ", "")
           .split("")
@@ -93,6 +96,13 @@ const app = (state = initialState, { type, payload }) => {
         correctGuesses: [],
         guessedLetters: [],
         wrongAttempts: 0,
+        reqNbGuesses: state.questions[state.questionCount + 1]
+          .replace(" ", "")
+          .split("")
+          .filter((x) => x != " ")
+          .filter(function (item, pos, self) {
+            return self.indexOf(item) == pos && item != " ";
+          }).length,
       };
     // case "INCORRECT_ANSWER":
     //   return {

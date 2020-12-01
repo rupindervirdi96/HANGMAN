@@ -4,5 +4,5 @@
     box-sizing: border-box;
     font-family: "Itim", monospace;
     color:White;
-    user-select: none;
+    /* user-select: none; */
   } 

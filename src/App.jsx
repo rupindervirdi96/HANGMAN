@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     document.querySelector(".keyboard").focus();
-  });
+  }, []);
 
   return (
     <AppStyles mode={app.mode}>
