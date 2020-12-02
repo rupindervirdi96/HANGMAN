@@ -16,46 +16,67 @@ function Keyboard(props) {
     currentPuzzle,
     wrongAttempts,
     guessedLetters,
+    currCat,
+    begin,
   } = useSelector((state) => ({
     correctGuesses: state.game.correctGuesses,
+    currCat: state.game.currCat,
     reqNbGuesses: state.game.reqNbGuesses,
     currentPuzzle: state.game.currentPuzzle,
     wrongAttempts: state.game.wrongAttempts,
     guessedLetters: state.game.guessedLetters,
+    begin: state.app.begin,
   }));
 
   const dispatch = useDispatch();
 
   const onkeypress = async (key) => {
-    await dispatch(
-      guess(key, correctGuesses, reqNbGuesses, currentPuzzle, wrongAttempts)
-    );
-
-    if (wrongAttempts === 6) {
-      dispatch(alert("fail", "U R DEAD", true));
+    console.log("alert");
+    if (currCat === "") {
+      dispatch(alert("warning", "No category selected", "true"));
       setTimeout(() => {
-        dispatch(alert("fail", "U R DEAD", false));
+        dispatch(alert("warning", "No category selected", false));
+      }, 2000);
+    } else if (wrongAttempts < 6) {
+      await dispatch(
+        guess(key, guessedLetters, reqNbGuesses, currentPuzzle, wrongAttempts)
+      );
+    } else {
+      dispatch(alert("fail", "Out of attempts", true));
+      setTimeout(() => {
+        dispatch(alert("fail", "Out of attempts", false));
+        dispatch({ type: "INCORRECT_ANSWER" });
       }, 2000);
     }
   };
 
   useEffect(() => {
     try {
-      if (correctGuesses.length === reqNbGuesses) {
-        dispatch({
-          type: "CORRECT_ANSWER",
-          payload: "",
-        });
+      if (correctGuesses.length === reqNbGuesses && begin) {
+        dispatch(alert("success", "Correct", true));
+        setTimeout(() => {
+          dispatch(alert("success", "Correct", false));
+        }, 2000);
+        setTimeout(() => {
+          dispatch({
+            type: "CORRECT_ANSWER",
+            payload: "",
+          });
+        }, 1000);
       }
     } catch (error) {}
   }, [correctGuesses]);
 
   return (
-    <KeyboardStyles className="keyboard" onKeyDown={onkeypress} tabIndex="0">
+    <KeyboardStyles className="keyboard" tabIndex="0">
       <div className="top">
         {keys.top.map((key, i) => {
-          return (
+          return !guessedLetters.includes(key) ? (
             <button onClick={() => onkeypress(key)} key={i} className="key">
+              <span>{key}</span>
+            </button>
+          ) : (
+            <button style={{ backgroundColor: "grey" }} key={i} className="key">
               <span>{key}</span>
             </button>
           );
@@ -63,8 +84,12 @@ function Keyboard(props) {
       </div>
       <div className="middle">
         {keys.middle.map((key, i) => {
-          return (
+          return !guessedLetters.includes(key) ? (
             <button onClick={() => onkeypress(key)} key={i} className="key">
+              <span>{key}</span>
+            </button>
+          ) : (
+            <button style={{ backgroundColor: "grey" }} key={i} className="key">
               <span>{key}</span>
             </button>
           );
@@ -72,8 +97,12 @@ function Keyboard(props) {
       </div>
       <div className="bottom">
         {keys.bottom.map((key, i) => {
-          return (
+          return !guessedLetters.includes(key) ? (
             <button onClick={() => onkeypress(key)} key={i} className="key">
+              <span>{key}</span>
+            </button>
+          ) : (
+            <button style={{ backgroundColor: "grey" }} key={i} className="key">
               <span>{key}</span>
             </button>
           );
@@ -119,8 +148,8 @@ const KeyboardStyles = styled.div`
         transform: scale(1.1);
       }
       @media (max-width: 460px) {
-        height: 20px;
-        width: 20px;
+        height: 25px;
+        width: 25px;
         transition: 150ms all linear;
       }
       span {

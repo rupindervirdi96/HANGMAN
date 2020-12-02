@@ -1,62 +1,7 @@
-const initialState = {
-  title: "HANGMAN",
-  puzzles: [
-    {
-      category: "MOVIES",
-      questions: [
-        "MATRIX",
-        "WANTED",
-        "LORD OF THE RINGS",
-        "TRANSFORMERS",
-        "THE SHAWSHANK REDEMPTION",
-        "THE FORREST GUMP",
-        "DUMB AND DUMBER",
-        "PAPILLON",
-        "CATCH ME IF YOU CAN",
-        "THE HUNGER GAMES",
-      ],
-    },
-    {
-      category: "TV SERIES",
-      questions: [
-        "PEAKY BLINDERS",
-        "LUCIFER",
-        "EMILY IN PARIS",
-        "FRIENDS",
-        "TWO AND A HALF MEN",
-        "STRANGER THINGS",
-        "PUNISHER",
-        "GOTHAM",
-        "MONEY HEIST",
-        "MIRZAPUR",
-      ],
-    },
-    {
-      category: "DAILY",
-      questions: [
-        "TOOTHPASTE",
-        "SUNLIGHT",
-        "MOBILE PHONE",
-        "MILK",
-        "BEDROOM",
-        "GROCERY",
-        "KEYS",
-        "REFRIGERATOR",
-        "METRO",
-        "LAPTOP",
-      ],
-    },
-  ],
-  currCat: "",
-  questions: [],
-  guessedLetters: [],
-  correctGuesses: [],
-  questionCount: 0,
-  wrongAttempts: 0,
-  currentPuzzle: "",
-  reqNbGuesses: 0,
-  score: 0,
-};
+import { gameState } from "./constants";
+
+const initialState = { ...gameState };
+
 const app = (state = initialState, { type, payload }) => {
   switch (type) {
     case "SET_CURR_CAT":
@@ -104,11 +49,22 @@ const app = (state = initialState, { type, payload }) => {
             return self.indexOf(item) == pos && item != " ";
           }).length,
       };
-    // case "INCORRECT_ANSWER":
-    //   return {
-    //     ...state,
-    //     wrongAttempts: state.wrongAttempts - 1,
-    //   };
+    case "INCORRECT_ANSWER":
+      return {
+        ...state,
+        questionCount: state.questionCount + 1,
+        currentPuzzle: state.questions[state.questionCount + 1],
+        correctGuesses: [],
+        guessedLetters: [],
+        wrongAttempts: 0,
+        reqNbGuesses: state.questions[state.questionCount + 1]
+          .replace(" ", "")
+          .split("")
+          .filter((x) => x != " ")
+          .filter(function (item, pos, self) {
+            return self.indexOf(item) == pos && item != " ";
+          }).length,
+      };
     case "FINISH_GAME":
       return {
         ...state,

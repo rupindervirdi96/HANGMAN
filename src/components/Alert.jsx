@@ -1,13 +1,17 @@
 import React from "react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { alert } from "../redux/actions/app.actions";
 
 const AlertStyle = styled.div`
   padding: 10px;
   background-color: ${(props) =>
-    props.type === "fail" ? "#da3939" : "#1fb645"};
+    props.type === "fail"
+      ? "#da3939"
+      : props.type === "warning"
+      ? "#de9b00"
+      : props.type === "success"
+      ? "#29d21d"
+      : ""};
   position: absolute;
   left: 50%;
   top: 100%;

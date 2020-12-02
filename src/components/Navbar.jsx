@@ -29,17 +29,61 @@ function Navbar() {
           {title.split("").map((letter, key) => {
             return (
               <li>
-                <img
+                {/* hidden={title.indexOf(letter) + 1 !== wrongAttempts} */}
+                {/* <img
                   src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
                   alt=""
-                  hidden={title.indexOf(letter) + 1 !== wrongAttempts}
-                />
+                /> */}
                 <span>{letter}</span>
               </li>
             );
           })}
+          {/* <ul type="none" className="crossList">
+            
+            <li>
+              <img
+                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
+                alt=""
+              />
+            </li>
+            <li>
+              <img
+                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
+                alt=""
+              />
+            </li>
+            <li>
+              <img
+                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
+                alt=""
+              />
+            </li>
+            <li>
+              <img
+                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
+                alt=""
+              />
+            </li>
+            <li>
+              <img
+                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
+                alt=""
+              />
+            </li>
+            <li>
+              <img
+                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
+                alt=""
+              />
+            </li>
+            <li>
+              <img
+                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
+                alt=""
+              />
+            </li>
+          </ul> */}
         </ul>
-        <ul className="crossList"></ul>
       </div>
       <button
         onClick={() => {
@@ -64,7 +108,6 @@ const NavbarStyles = styled.div`
   position: relative;
   border-radius: 5px 5px 0px 0px;
   z-index: 1;
-  /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
   button {
     padding: 10px;
     font-size: 12px;
@@ -87,10 +130,12 @@ const NavbarStyles = styled.div`
     color: white;
     font-family: "Roboto", monospace;
     text-align: center;
-    position: relative;
+    /* position: relative; */
+    width: 100%;
 
     ul {
-      width: 100%;
+      width: auto;
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -121,9 +166,12 @@ const NavbarStyles = styled.div`
           width: 25px;
         }
       }
-    }
-    .crossList {
-      position: absolute;
+      .crossList {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
     @media (max-width: 460px) {
       font-size: 16px;

@@ -9,12 +9,12 @@ export const selectCategory = (data) => (dispatch) => {
 
 export const guess = (
   key,
-  correctGuesses,
+  guessedLetters,
   reqNbGuesses,
   currentPuzzle,
   wrongAttempts
 ) => (dispatch) => {
-  if (!correctGuesses.includes(key)) {
+  if (!guessedLetters.includes(key)) {
     if (currentPuzzle.includes(key)) {
       dispatch({
         type: "CORRECT_GUESS",

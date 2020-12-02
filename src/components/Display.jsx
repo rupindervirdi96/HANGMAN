@@ -1,14 +1,19 @@
 import React from "react";
-import styled from "styled-components";
 import hintIcon from "../assets/hint.svg";
 import scoreIcon from "../assets/score.png";
 import darkModeIcon from "../assets/darkMode.svg";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "./Alert";
 import { alert } from "../redux/actions/app.actions";
-import { useEffect } from "react";
+import {
+  DisplayStyles,
+  PuzzleStyles,
+  CatDisplayStyles,
+  Puzzle,
+  Blank,
+  OptionStyles,
+} from "../styles";
 
-// Current Component
 function Display() {
   const { game, app, currentPuzzle, correctGuesses } = useSelector((state) => ({
     game: state.game,
@@ -24,11 +29,17 @@ function Display() {
       <PuzzleStyles>
         <Alert />
         <div className="puzzle-navBar">
-          <span>Question: {game.questionCount + 1}/10</span>
+          <span>
+            Question: <span>{game.questionCount + 1}</span>/
+            {game.questions.length}
+          </span>
           <h2>
             {game.currCat ? game.currCat : "Select a category to begin.."}
           </h2>
-          <span>Wrong Attempts: {game.wrongAttempts}/7</span>
+          <span style={{ textAlign: "right" }}>
+            Wrong Attempts: <span>{game.wrongAttempts}</span>
+            /7
+          </span>
         </div>
         <div
           style={{
@@ -111,133 +122,5 @@ function Display() {
     </DisplayStyles>
   );
 }
-
-const CatDisplayStyles = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  margin: auto;
-  text-align: center;
-  display: none;
-  ${(props) => (props.hide ? "display:none" : "display:block")};
-  div {
-    display: inline-block;
-    color: #ff8a31;
-    background: white;
-    padding: 6px 10px;
-    margin: 10px;
-    border-radius: 3px;
-  }
-`;
-
-const DisplayStyles = styled.div`
-  min-width: 100%;
-  margin: 10px 0px;
-  display: grid;
-  grid-template-rows: 2fr max-content;
-`;
-
-const PuzzleStyles = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  transform: translate(-50%, -50%);
-  padding: 10px 0px 20px 0px;
-  border-radius: 10px;
-  /* margin-bottom: 10px; */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* border: 1px solid rgba(0, 0, 0, 0.1); */
-  position: relative;
-  overflow: hidden;
-  .puzzle-navBar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0px 10px;
-    h2 {
-      flex: 1;
-      font-family: "Itim", monospace;
-      font-size: 25px;
-      font-weight: normal;
-      text-align: center;
-    }
-    span {
-      color: white;
-      font-size: 12px;
-    }
-  }
-`;
-
-const Puzzle = styled.div`
-  text-align: center;
-  width: 60%;
-  margin: 0 auto;
-  border-radius: 5px;
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0px 10px;
-  }
-`;
-
-const Blank = styled.span`
-  min-height: 25px;
-  min-width: 25px;
-  margin: 3px;
-  display: inline-block;
-  color: White;
-  font-size: 18px;
-  font-weight: bold;
-  /* padding: 2px; */
-  border-bottom: 3px solid white;
-`;
-
-const OptionStyles = styled.ul`
-  display: flex;
-  justify-content: space-around;
-  width: 50%;
-  margin: auto;
-  align-items: center;
-  padding: 10px 0px 0px 0px;
-
-  li {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    display: flex;
-    background-color: #fff;
-    background-position: center;
-    background-size: cover;
-    transition: 100ms all linear;
-    :nth-child(even) {
-      height: 40px;
-      width: 40px;
-      img {
-        height: 28px;
-        width: 28px;
-        margin: auto;
-      }
-    }
-    :hover {
-      background-color: #fff;
-      transition: 100ms all linear;
-      transform: scale(1.2);
-    }
-    img {
-      height: 22px;
-      width: 22px;
-      margin: auto;
-    }
-  }
-`;
 
 export default Display;
