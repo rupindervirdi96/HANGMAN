@@ -35,7 +35,7 @@ export const PuzzleStyles = styled.div`
       font-family: "Itim", monospace;
       font-size: 25px;
       font-weight: normal;
-      flex: 1;
+      flex: 5;
       text-align: center;
       @media (max-width: 600px) {
         font-size: 18px;
@@ -140,7 +140,6 @@ export const CatDisplayStyles = styled.div`
 
 //KEYBOARD STYLES
 
-
 //FOOTER STYLES
 export const FooterStyles = styled.div`
   display: flex;
@@ -153,4 +152,15 @@ export const FooterStyles = styled.div`
     font-size: 12px;
     text-align: center;
   }
+`;
+
+//Wall of fame
+
+export const WallOfFameStyles = styled.div`
+  height: 100vh;
+  width: 300px;
+  position: absolute;
+  left: 100%;
+  transform: translate(-100%);
+  background-color: #fff;
 `;

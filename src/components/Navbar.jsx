@@ -87,10 +87,10 @@ function Navbar() {
       </div>
       <button
         onClick={() => {
-          if (app.type === "register") {
+          if (app.type === "reg") {
             dispatch({ type: "TYPE_OF_MENU", payload: "" });
           } else {
-            dispatch({ type: "TYPE_OF_MENU", payload: "register" });
+            dispatch({ type: "TYPE_OF_MENU", payload: "reg" });
           }
         }}
       >
@@ -186,10 +186,10 @@ const CategoryStyles = styled.div`
   z-index: -1;
   overflow: hidden;
   top: 100%;
-  ${(props) =>
+  /* ${(props) =>
     props.hide
       ? "height: 0;padding: 0;border: none;opacity:0; transition: 150ms all linear;"
-      : "transition: 150ms all linear;  padding: 10px 10px 0px 10px;  border: 1px solid rgba(0, 0, 0, 0.1);"};
+      : "transition: 150ms all linear;  padding: 10px 10px 0px 10px;  border: 1px solid rgba(0, 0, 0, 0.1);"}; */
   border-radius: 5px;
   transition: 150ms all linear;
 
@@ -222,10 +222,10 @@ const RegisterStyles = styled.div`
   top: 100%;
   left: 100%;
   transform: translateX(-100%);
-  ${(props) =>
+  /* ${(props) =>
     props.hide
       ? "height: 0;padding: 0;border: none;transition: 150ms all linear;"
-      : "transition: 150ms all linear;padding: 10px;border: 1px solid rgba(0, 0, 0, 0.1);"};
+      : "transition: 150ms all linear;padding: 10px;border: 1px solid rgba(0, 0, 0, 0.1);"}; */
   border-radius: 5px;
   h3 {
     color: #0099ac;

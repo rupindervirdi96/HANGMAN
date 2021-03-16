@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Container from "./components/Container";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-// import Scoreboard from "./components/Scoreboard";
+import WallOfFame from "./components/WallOfFame";
 
 function App() {
   const { app } = useSelector((state) => ({
@@ -18,7 +18,7 @@ function App() {
   return (
     <AppStyles mode={app.mode}>
       <Container />
-      {/* <Scoreboard /> */}
+      {/* <WallOfFame /> */}
     </AppStyles>
   );
 }
@@ -29,7 +29,7 @@ const AppStyles = styled.div`
   width: 100%;
   display: flex;
   background-color: ${(props) =>
-    props.mode === "bright" ? "#e9e9e9" : "#666666"};
+    props.mode === "bright" ? "#0091ff" : "#000"};
 `;
 
 export default App;

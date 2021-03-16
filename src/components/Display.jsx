@@ -30,14 +30,14 @@ function Display() {
         <Alert />
         <div className="puzzle-navBar">
           <span>
-            Question: <span>{game.questionCount + 1}</span>/
-            {game.questions.length}
+            Question: <br />
+            <span>{game.questionCount + 1}</span>/{game.questions.length}
           </span>
           <h2>
             {game.currCat ? game.currCat : "Select a category to begin.."}
           </h2>
           <span style={{ textAlign: "right" }}>
-            Wrong Attempts: <span>{game.wrongAttempts}</span>
+            Wrong Attempts: <br /> <span>{game.wrongAttempts}</span>
             /7
           </span>
         </div>

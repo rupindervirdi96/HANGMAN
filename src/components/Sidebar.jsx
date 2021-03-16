@@ -47,27 +47,24 @@ function Sidebar(props) {
 const SidebarStyles = styled.div`
   height: auto;
   position: absolute;
-  width: 200px;
-  background-color: #ff8a31;
+  width: 100%;
   z-index: -10;
   border-radius: 5px;
-  padding: 10px;
-  overflow: hidden;
-  ${(props) =>
-    props.type === "cat"
-      ? "left: 0%;transform:translateX(-100%);transition:250ms all linear;"
-      : props.type === "register"
-      ? "left:100%;transition:250ms all linear;"
-      : "left:50%;transition:250ms all linear;"};
+  display: flex;
+  justify-content: space-between;
 `;
 
 const CategoryStyles = styled.div`
+  width: 200px;
+  padding: 10px;
+  background-color: #ff8a31;
+  border-radius: 10px;
+
   ${(props) =>
-    props.type === ""
-      ? "display:block"
-      : props.type === "register"
-      ? "display:none; transition-delay:50ms"
-      : ""};
+    props.type == "cat"
+      ? "transform:translate(-100%); ; opacity:1"
+      : "transform:translate(0%);opacity: 0;"};
+  transition: all 150ms ease-in;
   h3 {
     color: #fff;
     padding: 12px 0px 13px 0px;
@@ -89,12 +86,16 @@ const CategoryStyles = styled.div`
 `;
 
 const RegisterStyles = styled.div`
+  width: 200px;
+  padding: 10px;
+  height: auto;
+  border-radius: 10px;
+  background-color: #ff8a31;
   ${(props) =>
-    props.type == ""
-      ? "display:block"
-      : props.type === "cat"
-      ? "display:none;transition-delay:150ms"
-      : ""};
+    props.type == "reg"
+      ? "transform:translate(100%); opacity:1"
+      : "transform:translate(0%);opacity: 0;"};
+  transition: all 150ms ease-in;
   h3 {
     color: #fff;
     padding: 12px 0px 12px 0px;

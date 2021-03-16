@@ -31,18 +31,22 @@ const AlertStyle = styled.div`
 `;
 
 function Alert() {
-  const { type, message, show, wrongAttempts } = useSelector((state) => ({
-    type: state.app.alert.type,
-    message: state.app.alert.message,
-    show: state.app.alert.show,
-    wrongAttempts: state.game.wrongAttempts,
-  }));
+  const { type, message, show, wrongAttempts, currPuzzle } = useSelector(
+    (state) => ({
+      type: state.app.alert.type,
+      message: state.app.alert.message,
+      show: state.app.alert.show,
+      wrongAttempts: state.game.wrongAttempts,
+      currPuzzle: state.game.currentPuzzle,
+    })
+  );
 
   const dispatch = useDispatch();
 
   return (
     <AlertStyle type={type} show={show}>
       {message}
+      {message === "Out of attempts"}
     </AlertStyle>
   );
 }
