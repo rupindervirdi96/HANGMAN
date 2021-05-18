@@ -30,8 +30,9 @@ function Keyboard(props) {
 
   const dispatch = useDispatch();
 
+  //for onscreen keyboard
   const onkeypress = async (key) => {
-    console.log("alert");
+    console.log(currCat);
     if (currCat === "") {
       dispatch(alert("warning", "No category selected", "true"));
       setTimeout(() => {
@@ -51,21 +52,36 @@ function Keyboard(props) {
   };
 
   useEffect(() => {
-    try {
-      if (correctGuesses.length === reqNbGuesses && begin) {
-        dispatch(alert("success", "Correct", true));
-        setTimeout(() => {
-          dispatch(alert("success", "Correct", false));
-        }, 2000);
-        setTimeout(() => {
-          dispatch({
-            type: "CORRECT_ANSWER",
-            payload: "",
-          });
-        }, 1000);
+    document.onkeydown = async (event) => {
+      if (
+        (event.keyCode > 64 && event.keyCode < 91) ||
+        (event.keyCode > 96 && event.keyCode < 123)
+      ) {
+        if (currCat === "") {
+          dispatch(alert("warning", "No category selected", "true"));
+          setTimeout(() => {
+            dispatch(alert("warning", "No category selected", false));
+          }, 2000);
+        } else if (wrongAttempts < 6) {
+          await dispatch(
+            guess(
+              event.key.toUpperCase(),
+              guessedLetters,
+              reqNbGuesses,
+              currentPuzzle,
+              wrongAttempts
+            )
+          );
+        } else {
+          dispatch(alert("fail", "Out of attempts", true));
+          setTimeout(() => {
+            dispatch(alert("fail", "Out of attempts", false));
+            dispatch({ type: "INCORRECT_ANSWER" });
+          }, 2000);
+        }
       }
-    } catch (error) {}
-  }, [correctGuesses]);
+    };
+  }, [currCat, guessedLetters, reqNbGuesses, currentPuzzle, wrongAttempts]);
 
   return (
     <KeyboardStyles className="keyboard" tabIndex="0">
