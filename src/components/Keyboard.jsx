@@ -11,13 +11,13 @@ function Keyboard(props) {
   }));
 
   const {
-    correctGuesses,
+    // correctGuesses,
     reqNbGuesses,
     currentPuzzle,
     wrongAttempts,
     guessedLetters,
     currCat,
-    begin,
+    // begin,
   } = useSelector((state) => ({
     correctGuesses: state.game.correctGuesses,
     currCat: state.game.currCat,
@@ -81,7 +81,7 @@ function Keyboard(props) {
         }
       }
     };
-  }, [currCat, guessedLetters, reqNbGuesses, currentPuzzle, wrongAttempts]);
+  }, [dispatch, currCat, guessedLetters, reqNbGuesses, currentPuzzle, wrongAttempts]);
 
   return (
     <KeyboardStyles className="keyboard" tabIndex="0">

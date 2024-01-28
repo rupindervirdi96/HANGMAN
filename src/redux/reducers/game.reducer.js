@@ -18,7 +18,7 @@ const app = (state = initialState, { type, payload }) => {
           .replace(" ", "")
           .split("")
           .filter(function (item, pos, self) {
-            return self.indexOf(item) == pos;
+            return self.indexOf(item) === pos;
           }).length,
       };
     case "CORRECT_GUESS":
@@ -44,9 +44,9 @@ const app = (state = initialState, { type, payload }) => {
         reqNbGuesses: state.questions[state.questionCount + 1]
           .replace(" ", "")
           .split("")
-          .filter((x) => x != " ")
+          .filter((x) => x !== " ")
           .filter(function (item, pos, self) {
-            return self.indexOf(item) == pos && item != " ";
+            return self.indexOf(item) === pos && item !== " ";
           }).length,
       };
     case "INCORRECT_ANSWER":
@@ -60,9 +60,9 @@ const app = (state = initialState, { type, payload }) => {
         reqNbGuesses: state.questions[state.questionCount + 1]
           .replace(" ", "")
           .split("")
-          .filter((x) => x != " ")
+          .filter((x) => x !== " ")
           .filter(function (item, pos, self) {
-            return self.indexOf(item) == pos && item != " ";
+            return self.indexOf(item) === pos && item !== " ";
           }).length,
       };
     case "FINISH_GAME":

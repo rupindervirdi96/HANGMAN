@@ -1,5 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const AlertStyle = styled.div`
@@ -31,17 +32,24 @@ const AlertStyle = styled.div`
 `;
 
 function Alert() {
-  const { type, message, show, wrongAttempts, currPuzzle } = useSelector(
+  const { type, message, show} = useSelector(
     (state) => ({
       type: state.app.alert.type,
       message: state.app.alert.message,
-      show: state.app.alert.show,
-      wrongAttempts: state.game.wrongAttempts,
-      currPuzzle: state.game.currentPuzzle,
+      show: state.app.alert.show
     })
   );
+  // const { type, message, show, wrongAttempts, currPuzzle } = useSelector(
+  //   (state) => ({
+  //     type: state.app.alert.type,
+  //     message: state.app.alert.message,
+  //     show: state.app.alert.show,
+  //     wrongAttempts: state.game.wrongAttempts,
+  //     currPuzzle: state.game.currentPuzzle,
+  //   })
+  // );
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <AlertStyle type={type} show={show}>

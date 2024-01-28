@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import Display from "./Display";
+// import Display from "./Display";
 
 function Sidebar(props) {
   const { app, game } = useSelector((state) => ({
@@ -61,7 +61,7 @@ const CategoryStyles = styled.div`
   border-radius: 10px;
 
   ${(props) =>
-    props.type == "cat"
+    props.type === "cat"
       ? "transform:translate(-100%); ; opacity:1"
       : "transform:translate(0%);opacity: 0;"};
   transition: all 150ms ease-in;
@@ -92,7 +92,7 @@ const RegisterStyles = styled.div`
   border-radius: 10px;
   background-color: #ff8a31;
   ${(props) =>
-    props.type == "reg"
+    props.type === "reg"
       ? "transform:translate(100%); opacity:1"
       : "transform:translate(0%);opacity: 0;"};
   transition: all 150ms ease-in;

@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 import { useSelector } from "react-redux";
-import WallOfFame from "./WallOfFame";
+// import WallOfFame from "./WallOfFame";
 
 function Container(props) {
   const { app } = useSelector((state) => ({

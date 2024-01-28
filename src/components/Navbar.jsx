@@ -3,11 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 function Navbar() {
-  const { app, title, wrongAttempts } = useSelector((state) => ({
+  const { app, title } = useSelector((state) => ({
     app: state.app,
-    title: state.game.title,
-    wrongAttempts: state.game.wrongAttempts,
+    title: state.game.title
   }));
+  // const { app, title, wrongAttempts } = useSelector((state) => ({
+  //   app: state.app,
+  //   title: state.game.title,
+  //   wrongAttempts: state.game.wrongAttempts,
+  // }));
 
   const dispatch = useDispatch();
 
@@ -179,75 +183,74 @@ const NavbarStyles = styled.div`
   }
 `;
 
-const CategoryStyles = styled.div`
-  position: absolute;
-  width: 200px;
-  background-color: #fdfdfd;
-  z-index: -1;
-  overflow: hidden;
-  top: 100%;
-  /* ${(props) =>
-    props.hide
-      ? "height: 0;padding: 0;border: none;opacity:0; transition: 150ms all linear;"
-      : "transition: 150ms all linear;  padding: 10px 10px 0px 10px;  border: 1px solid rgba(0, 0, 0, 0.1);"}; */
-  border-radius: 5px;
-  transition: 150ms all linear;
+// const CategoryStyles = styled.div`
+//   position: absolute;
+//   width: 200px;
+//   background-color: #fdfdfd;
+//   z-index: -1;
+//   overflow: hidden;
+//   top: 100%;
+//   /* ${(props) =>
+//     props.hide
+//       ? "height: 0;padding: 0;border: none;opacity:0; transition: 150ms all linear;"
+//       : "transition: 150ms all linear;  padding: 10px 10px 0px 10px;  border: 1px solid rgba(0, 0, 0, 0.1);"}; */
+//   border-radius: 5px;
+//   transition: 150ms all linear;
 
-  h3 {
-    color: #0099ac;
-    padding: 12px 0px 13px 0px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  ul {
-    padding: 10px 0px;
-  }
-  ul li {
-    padding: 5px;
-    border-radius: 3px;
-    transition: 150ms all linear;
-    font-size: 14px;
-    :hover {
-      transition: 150ms all linear;
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-  }
-`;
+//   h3 {
+//     color: #0099ac;
+//     padding: 12px 0px 13px 0px;
+//     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+//   }
+//   ul {
+//     padding: 10px 0px;
+//   }
+//   ul li {
+//     padding: 5px;
+//     border-radius: 3px;
+//     transition: 150ms all linear;
+//     font-size: 14px;
+//     :hover {
+//       transition: 150ms all linear;
+//       background-color: rgba(0, 0, 0, 0.2);
+//     }
+//   }
+// `;
 
-const RegisterStyles = styled.div`
-  position: absolute;
-  width: 200px;
-  background-color: #fdfdfd;
-  z-index: -1;
-  overflow: hidden;
-  top: 100%;
-  left: 100%;
-  transform: translateX(-100%);
-  /* ${(props) =>
-    props.hide
-      ? "height: 0;padding: 0;border: none;transition: 150ms all linear;"
-      : "transition: 150ms all linear;padding: 10px;border: 1px solid rgba(0, 0, 0, 0.1);"}; */
-  border-radius: 5px;
-  h3 {
-    color: #0099ac;
-    padding: 12px 0px 13px 0px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-  input {
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    outline: none;
-    margin: 10px 0;
-  }
-  input[type="submit"] {
-    margin: 0px;
-    padding: 5px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    color: #2d2d2d;
-  }
-`;
+// const RegisterStyles = styled.div`
+//   position: absolute;
+//   width: 200px;
+//   background-color: #fdfdfd;
+//   z-index: -1;
+//   overflow: hidden;
+//   top: 100%;
+//   left: 100%;
+//   transform: translateX(-100%);
+//   /* ${(props) =>
+//     props.hide
+//       ? "height: 0;padding: 0;border: none;transition: 150ms all linear;"
+//       : "transition: 150ms all linear;padding: 10px;border: 1px solid rgba(0, 0, 0, 0.1);"}; */
+//   border-radius: 5px;
+//   h3 {
+//     color: #0099ac;
+//     padding: 12px 0px 13px 0px;
+//     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+//   }
+//   input {
+//     padding: 10px;
+//     border-radius: 3px;
+//     border: 1px solid rgba(0, 0, 0, 0.1);
+//     outline: none;
+//     margin: 10px 0;
+//   }
+//   input[type="submit"] {
+//     margin: 0px;
+//     padding: 5px;
+//     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+//     background-color: #fff;
+//     color: #2d2d2d;
+//   }
+// `;
 
 export default Navbar;
 
-// dispatch({ type: "HIDE_CAT", payload: true });

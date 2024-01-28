@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Container from "./components/Container";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { guess } from "./redux/actions/game.actions";
+// import { guess } from "./redux/actions/game.actions";
 import { alert } from "./redux/actions/app.actions";
 // import WallOfFame from "./components/WallOfFame";
 
@@ -18,18 +18,18 @@ function App() {
   const {
     correctGuesses,
     reqNbGuesses,
-    currentPuzzle,
-    wrongAttempts,
-    guessedLetters,
-    currCat,
+    // currentPuzzle,
+    // wrongAttempts,
+    // guessedLetters,
+    // currCat,
     begin,
   } = useSelector((state) => ({
     correctGuesses: state.game.correctGuesses,
-    currCat: state.game.currCat,
+    // currCat: state.game.currCat,
     reqNbGuesses: state.game.reqNbGuesses,
-    currentPuzzle: state.game.currentPuzzle,
-    wrongAttempts: state.game.wrongAttempts,
-    guessedLetters: state.game.guessedLetters,
+    // currentPuzzle: state.game.currentPuzzle,
+    // wrongAttempts: state.game.wrongAttempts,
+    // guessedLetters: state.game.guessedLetters,
     begin: state.app.begin,
   }));
 
@@ -48,9 +48,7 @@ function App() {
         }, 1000);
       }
     } catch (error) {}
-  }, [correctGuesses]);
-
-  
+  }, [begin, dispatch, reqNbGuesses, correctGuesses]);
 
   return (
     <AppStyles mode={app.mode}>
