@@ -1,0 +1,1 @@
+{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,EACE,QAAS,CACT,SAAU,CACV,qBAAsB,CACtB,4BAA8B,CAC9B,UAAY,CACZ,wBAAiB,CAAjB,oBAAiB,CAAjB,gBACF","file":"main.b73dab4a.chunk.css","sourcesContent":["* {\r\n  margin: 0;\r\n  padding: 0;\r\n  box-sizing: border-box;\r\n  font-family: \"Itim\", monospace;\r\n  color: black;\r\n  user-select: none;\r\n}\r\n"]}
