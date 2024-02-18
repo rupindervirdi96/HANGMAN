@@ -4,7 +4,7 @@ import scoreIcon from "../assets/score.png";
 import darkModeIcon from "../assets/darkMode.svg";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "./Alert";
-import { alert } from "../redux/actions/app.actions";
+
 import {
   DisplayStyles,
   PuzzleStyles,
@@ -29,17 +29,11 @@ function Display() {
       <PuzzleStyles>
         <Alert />
         <div className="puzzle-navBar">
-          <span>
-            Question: <br />
-            <span>{game.questionCount + 1}</span>/{game.questions.length}
-          </span>
+          <span> {app.begin && `Questions left: ${game.questions.length - (game.questionCount + 1)}`} </span>
           <h2>
             {game.currCat ? game.currCat : "Select a category to begin.."}
           </h2>
-          <span style={{ textAlign: "right" }}>
-            Wrong Attempts: <br /> <span>{game.wrongAttempts}</span>
-            /7
-          </span>
+          <span>{app.begin && `Attempts Left: ${5 - game.wrongAttempts}`}</span>
         </div>
         <div
           style={{
@@ -89,7 +83,7 @@ function Display() {
         </div>
       </PuzzleStyles>
       <OptionStyles>
-        <li>
+        <li onClick={()=>alert("Work In Progress")}>
           <img src={hintIcon} alt="" />
         </li>
         <li>
@@ -97,17 +91,7 @@ function Display() {
             src={scoreIcon}
             alt=""
             onClick={() => {
-              if (game.wrongAttempts > 0) {
-                dispatch({
-                  type: "CORRECT_GUESS",
-                });
-              }
-              if (game.wrongAttempts === 1) {
-                dispatch(alert("fail", "out of attempts", true));
-                setTimeout(() => {
-                  dispatch(alert("fail", "out of attempts", false));
-                }, 2000);
-              }
+              dispatch({ type: "SCORES_TOGGLE" });
             }}
           />
         </li>

@@ -77,4 +77,5 @@ export const gameState = {
   currentPuzzle: "",
   reqNbGuesses: 0,
   score: 0,
+  showScore: false
 };

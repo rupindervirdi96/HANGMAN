@@ -6,7 +6,7 @@ const initialState = {
     bottom: ["Z", "X", "C", "V", "B", "N", "M"],
   },
   begin: false,
-  mode: "bright",
+  mode: "light",
   alert: {
     type: "",
     message: "",
@@ -24,10 +24,10 @@ const app = (state = initialState, { type, payload }) => {
     case "BEGIN_GAME":
       return { ...state, begin: payload };
     case "APP_MODE":
-      if (state.mode === "bright") {
+      if (state.mode === "light") {
         return { ...state, mode: "dark" };
       } else {
-        return { ...state, mode: "bright" };
+        return { ...state, mode: "light" };
       }
     case "ALERT":
       return {

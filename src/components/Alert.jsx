@@ -9,9 +9,9 @@ const AlertStyle = styled.div`
     props.type === "fail"
       ? "#da3939"
       : props.type === "warning"
-      ? "#de9b00"
+      ? "#9231ff"
       : props.type === "success"
-      ? "#29d21d"
+      ? "#0b883b"
       : ""};
   position: absolute;
   left: 50%;
@@ -54,7 +54,7 @@ function Alert() {
   return (
     <AlertStyle type={type} show={show}>
       {message}
-      {message === "Out of attempts"}
+      {message === "Out of attempts -> Next Question"}
     </AlertStyle>
   );
 }

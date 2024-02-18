@@ -16,18 +16,15 @@ export const PuzzleStyles = styled.div`
   transform: translate(-50%, -50%);
   padding: 10px 0px 20px 0px;
   border-radius: 10px;
-  /* margin-bottom: 10px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid rgba(0, 0, 0, 0.1); */
   position: relative;
   overflow: hidden;
   .puzzle-navBar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: max-content 1fr max-content;
     width: 100%;
     margin: 0 auto;
     padding: 0px 10px;
@@ -35,7 +32,6 @@ export const PuzzleStyles = styled.div`
       font-family: "Itim", monospace;
       font-size: 25px;
       font-weight: normal;
-      flex: 5;
       text-align: center;
       @media (max-width: 600px) {
         font-size: 18px;
@@ -43,13 +39,11 @@ export const PuzzleStyles = styled.div`
     }
     span {
       flex: 1;
-      color: white;
-      font-size: 12px;
-      span {
-        font-size: 24px;
-        color: #ffffff;
-        font-weight: bold;
-      }
+      color: #444;
+      font-size: 13px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 `;
@@ -75,7 +69,6 @@ export const Blank = styled.span`
   color: White;
   font-size: 18px;
   font-weight: bold;
-  /* padding: 2px; */
   border-bottom: 3px solid white;
 `;
 
@@ -92,7 +85,6 @@ export const OptionStyles = styled.ul`
     width: 30px;
     border-radius: 50%;
     display: flex;
-    background-color: #fff;
     background-position: center;
     background-size: cover;
     transition: 100ms all linear;
@@ -106,7 +98,6 @@ export const OptionStyles = styled.ul`
       }
     }
     :hover {
-      background-color: #fff;
       transition: 100ms all linear;
       transform: scale(1.2);
     }
@@ -130,8 +121,8 @@ export const CatDisplayStyles = styled.div`
   ${(props) => (props.hide ? "display:none" : "display:block")};
   div {
     display: inline-block;
-    color: #ff8a31;
-    background: white;
+    color: white;
+    background: #9231ff;
     padding: 6px 10px;
     margin: 10px;
     border-radius: 3px;
@@ -152,15 +143,4 @@ export const FooterStyles = styled.div`
     font-size: 12px;
     text-align: center;
   }
-`;
-
-//Wall of fame
-
-export const WallOfFameStyles = styled.div`
-  height: 100vh;
-  width: 300px;
-  position: absolute;
-  left: 100%;
-  transform: translate(-100%);
-  background-color: #fff;
 `;

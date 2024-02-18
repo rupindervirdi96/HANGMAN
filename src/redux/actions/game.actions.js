@@ -10,16 +10,13 @@ export const selectCategory = (data) => (dispatch) => {
 export const guess =
   (key, guessedLetters, reqNbGuesses, currentPuzzle, wrongAttempts) =>
   (dispatch) => {
-    // console.log(key);
     if (!guessedLetters.includes(key)) {
       if (currentPuzzle.includes(key)) {
-        console.log("Correct");
         dispatch({
           type: "CORRECT_GUESS",
           payload: { key: key },
         });
       } else {
-        console.log("Wrong");
         dispatch({
           type: "WRONG_GUESS",
           payload: { key: key },

@@ -4,9 +4,8 @@ import styled from "styled-components";
 import Container from "./components/Container";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { guess } from "./redux/actions/game.actions";
 import { alert } from "./redux/actions/app.actions";
-// import WallOfFame from "./components/WallOfFame";
+import { Clouds } from "./components/Clouds";
 
 function App() {
   const { app } = useSelector((state) => ({
@@ -18,18 +17,10 @@ function App() {
   const {
     correctGuesses,
     reqNbGuesses,
-    // currentPuzzle,
-    // wrongAttempts,
-    // guessedLetters,
-    // currCat,
     begin,
   } = useSelector((state) => ({
     correctGuesses: state.game.correctGuesses,
-    // currCat: state.game.currCat,
     reqNbGuesses: state.game.reqNbGuesses,
-    // currentPuzzle: state.game.currentPuzzle,
-    // wrongAttempts: state.game.wrongAttempts,
-    // guessedLetters: state.game.guessedLetters,
     begin: state.app.begin,
   }));
 
@@ -53,7 +44,9 @@ function App() {
   return (
     <AppStyles mode={app.mode}>
       <Container />
-      {/* <WallOfFame /> */}
+      <Clouds position={{ top: 15, left: 5 }} size={"small"} />
+      <Clouds position={{ top: 40, left: 85 }} size={"medium"} />
+      <Clouds position={{ top: 80, left: 10 }} size={"small"} />
     </AppStyles>
   );
 }
@@ -63,8 +56,11 @@ const AppStyles = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
-  background-color: ${(props) =>
-    props.mode === "bright" ? "#0091ff" : "#000"};
+  overflow: hidden;
+  background-color: ${(props) => (props.mode === "light" ? "#a7a7a7" : "#000")};
+  *{
+    color: ${(props) => (props.mode === "light" ? "#000" : "#ddd !important")};
+  }
 `;
 
 export default App;

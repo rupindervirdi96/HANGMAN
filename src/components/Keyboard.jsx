@@ -32,20 +32,19 @@ function Keyboard(props) {
 
   //for onscreen keyboard
   const onkeypress = async (key) => {
-    console.log(currCat);
     if (currCat === "") {
       dispatch(alert("warning", "No category selected", "true"));
       setTimeout(() => {
         dispatch(alert("warning", "No category selected", false));
       }, 2000);
-    } else if (wrongAttempts < 6) {
+    } else if (wrongAttempts < 5) {
       await dispatch(
         guess(key, guessedLetters, reqNbGuesses, currentPuzzle, wrongAttempts)
       );
     } else {
-      dispatch(alert("fail", "Out of attempts", true));
+      dispatch(alert("fail", "Out of attempts -> Next Question", true));
       setTimeout(() => {
-        dispatch(alert("fail", "Out of attempts", false));
+        dispatch(alert("fail", "Out of attempts -> Next Question", false));
         dispatch({ type: "INCORRECT_ANSWER" });
       }, 2000);
     }
@@ -62,7 +61,7 @@ function Keyboard(props) {
           setTimeout(() => {
             dispatch(alert("warning", "No category selected", false));
           }, 2000);
-        } else if (wrongAttempts < 6) {
+        } else if (wrongAttempts < 5) {
           await dispatch(
             guess(
               event.key.toUpperCase(),
@@ -72,16 +71,27 @@ function Keyboard(props) {
               wrongAttempts
             )
           );
-        } else {
-          dispatch(alert("fail", "Out of attempts", true));
-          setTimeout(() => {
-            dispatch(alert("fail", "Out of attempts", false));
-            dispatch({ type: "INCORRECT_ANSWER" });
-          }, 2000);
         }
       }
     };
-  }, [dispatch, currCat, guessedLetters, reqNbGuesses, currentPuzzle, wrongAttempts]);
+  }, [
+    dispatch,
+    currCat,
+    guessedLetters,
+    reqNbGuesses,
+    currentPuzzle,
+    wrongAttempts,
+  ]);
+
+  useEffect(() => {
+    if (wrongAttempts === 5) {
+      dispatch(alert("fail", "Out of attempts -> Next Question", true));
+      setTimeout(() => {
+        dispatch(alert("fail", "Out of attempts -> Next Question", false));
+        dispatch({ type: "INCORRECT_ANSWER" });
+      }, 2000);
+    }
+  }, [wrongAttempts, dispatch]);
 
   return (
     <KeyboardStyles className="keyboard" tabIndex="0">
@@ -157,7 +167,7 @@ const KeyboardStyles = styled.div`
       margin: 5px;
       transition: 150ms all linear;
       border-radius: 2px;
-      background-color: #ff8a31;
+      background-color: #9231ff;
       border: none;
       outline: none;
       :hover {
@@ -172,6 +182,7 @@ const KeyboardStyles = styled.div`
         margin: auto;
         font-size: 14px;
         font-weight: bold;
+        color: white;
       }
     }
   }

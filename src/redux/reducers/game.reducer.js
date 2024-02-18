@@ -70,7 +70,10 @@ const app = (state = initialState, { type, payload }) => {
         ...state,
         wrongAttempts: state.wrongAttempts - 1,
       };
-
+    case "SCORES_TOGGLE":
+      return {
+        ...state, showScore: !state.showScore
+      }
     default:
       return state;
   }

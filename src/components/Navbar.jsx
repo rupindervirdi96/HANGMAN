@@ -5,7 +5,7 @@ import styled from "styled-components";
 function Navbar() {
   const { app, title } = useSelector((state) => ({
     app: state.app,
-    title: state.game.title
+    title: state.game.title,
   }));
   // const { app, title, wrongAttempts } = useSelector((state) => ({
   //   app: state.app,
@@ -26,67 +26,17 @@ function Navbar() {
           }
         }}
       >
-        CHANGE CATEGORY
+        Change category
       </button>
       <div>
         <ul type="none">
           {title.split("").map((letter, key) => {
             return (
               <li>
-                {/* hidden={title.indexOf(letter) + 1 !== wrongAttempts} */}
-                {/* <img
-                  src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
-                  alt=""
-                /> */}
                 <span>{letter}</span>
               </li>
             );
           })}
-          {/* <ul type="none" className="crossList">
-            
-            <li>
-              <img
-                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
-                alt=""
-              />
-            </li>
-            <li>
-              <img
-                src="https://www.pngkit.com/png/full/336-3368091_image-red-cross-wrong-clipart.png"
-                alt=""
-              />
-            </li>
-          </ul> */}
         </ul>
       </div>
       <button
@@ -98,7 +48,7 @@ function Navbar() {
           }
         }}
       >
-        REGISTER SCORE
+        Register score
       </button>
     </NavbarStyles>
   );
@@ -111,14 +61,13 @@ const NavbarStyles = styled.div`
   padding: 10px 0px;
   position: relative;
   border-radius: 5px 5px 0px 0px;
-  z-index: 1;
   button {
     padding: 10px;
     font-size: 12px;
     color: #fff;
-    background-color: #ff8a31;
+    background-color: #9231ff;
     border: none;
-    border-radius: 2px;
+    border-radius: 4px;
     transition: 100ms all linear;
     outline: none;
     :hover {
@@ -127,14 +76,13 @@ const NavbarStyles = styled.div`
     }
     @media (max-width: 460px) {
       padding: 6px;
-      font-size: 8px;
+      font-size: 12px;
     }
   }
   div {
     color: white;
     font-family: "Roboto", monospace;
     text-align: center;
-    /* position: relative; */
     width: 100%;
 
     ul {
@@ -253,4 +201,3 @@ const NavbarStyles = styled.div`
 // `;
 
 export default Navbar;
-
